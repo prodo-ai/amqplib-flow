@@ -1,3 +1,4 @@
+// @flow
 
 declare class events$EventEmitter {
   static listenerCount(emitter: events$EventEmitter, event: string): number;
@@ -12,97 +13,96 @@ declare class events$EventEmitter {
   setMaxListeners(n: number): void;
 }
 
-type SocketOptions = {}; // TODO
-type Args = { [key: string]: string };
-type Headers = { [key: string]: string };
-
-type QueueOptions = {
-  exclusive?: boolean,
-  durable?: boolean,
-  autoDelete?: boolean,
-  arguments?: Args,
-  /* extenstions */
-  messageTtl?: number,
-  expires?: number,
-  deadLetterExchange?: string,
-  maxLength?: number,
-  maxPriority?: number
-};
-
-type QueueOk = {
-  queue: string,
-  messageCount: number,
-  consumerCount: number
-};
-
-type DeleteOk = {
-  messageCount: number
-};
-
-type DeleteQueueOpts = {
-  ifUnused?: boolean,
-  ifEmpty?: boolean
-};
-
-type ExchangeType =
-  | 'fanout'
-  | 'direct'
-  | 'topic'
-  | 'headers'
-;
-
-type ExchangeOpts = {
-  durable?: boolean,
-  internal?: boolean,
-  autoDelete?: boolean,
-  alternateExchange?: string,
-  arguments?: Args
-};
-
-type ExchangeOk = {
-  exchange: string
-};
-
-type ExchangeDeleteOpts = {
-  ifUnused?: boolean;
-};
-
-type PublishOpts = {
-  expiration?: number,
-  userId?: string,
-  CC?: string | Array<string>,
-  BCC?: string | Array<string>,
-  priority?: number,
-  persistent?: boolean,
-  deliveryMode?: 1 | 2,
-  mandatory?: boolean,
-  contentType?: string,
-  contentEncoding?: string,
-  headers?: Headers,
-  correlationId?: string,
-  replyTo?: string,
-  messageId?: string,
-  timestamp?: number,
-  type?: string,
-  appId?: string
-};
-
-type ConsumeOpts = {
-  consumerTag?: string,
-  noLocal?: boolean,
-  noAck?: boolean,
-  exclusive?: boolean,
-  priority?: number,
-  arguments?: Args
-};
-
-type GetOpts = {
-  noAck?: boolean
-};
-
-type Callback<T> = (err: Error, res: T) => any;
-
 declare module "amqplib" {
+  declare type SocketOptions = {}; // TODO
+  declare type Args = { [key: string]: string };
+  declare type Headers = { [key: string]: string };
+
+  declare type QueueOptions = {
+    exclusive?: boolean,
+    durable?: boolean,
+    autoDelete?: boolean,
+    arguments?: Args,
+    /* extenstions */
+    messageTtl?: number,
+    expires?: number,
+    deadLetterExchange?: string,
+    maxLength?: number,
+    maxPriority?: number
+  };
+
+  declare type QueueOk = {
+    queue: string,
+    messageCount: number,
+    consumerCount: number
+  };
+
+  declare type DeleteOk = {
+    messageCount: number
+  };
+
+  declare type DeleteQueueOpts = {
+    ifUnused?: boolean,
+    ifEmpty?: boolean
+  };
+
+  declare type ExchangeType =
+    | 'fanout'
+    | 'direct'
+    | 'topic'
+    | 'headers'
+  ;
+
+  declare type ExchangeOpts = {
+    durable?: boolean,
+    internal?: boolean,
+    autoDelete?: boolean,
+    alternateExchange?: string,
+    arguments?: Args
+  };
+
+  declare type ExchangeOk = {
+    exchange: string
+  };
+
+  declare type ExchangeDeleteOpts = {
+    ifUnused?: boolean;
+  };
+
+  declare type PublishOpts = {
+    expiration?: number,
+    userId?: string,
+    CC?: string | Array<string>,
+    BCC?: string | Array<string>,
+    priority?: number,
+    persistent?: boolean,
+    deliveryMode?: 1 | 2,
+    mandatory?: boolean,
+    contentType?: string,
+    contentEncoding?: string,
+    headers?: Headers,
+    correlationId?: string,
+    replyTo?: string,
+    messageId?: string,
+    timestamp?: number,
+    type?: string,
+    appId?: string
+  };
+
+  declare type ConsumeOpts = {
+    consumerTag?: string,
+    noLocal?: boolean,
+    noAck?: boolean,
+    exclusive?: boolean,
+    priority?: number,
+    arguments?: Args
+  };
+
+  declare type GetOpts = {
+    noAck?: boolean
+  };
+
+  declare type Callback<T> = (err: Error, res: T) => any;
 
   declare class Message {
     content: Buffer;
